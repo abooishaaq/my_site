@@ -31,10 +31,6 @@ body {
     font: 1rem/1.5 Rubik, sans-serif;
 }
 
-ol {
-    list-style-type: none;
-}
-
 li {
     position: relative;
     margin: 0;
@@ -60,6 +56,15 @@ li:after {
     top: 2px;
     height: 12px;
     width: 12px;
+}
+
+.vertical-line {
+    position: absolute;
+    top: 0;
+    left: 5px;
+    width: 2.5px;
+    height: 100%;
+    background: #000;
 }
 
 #bg {
