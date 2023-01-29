@@ -11,13 +11,22 @@ const random_dark_color = () => {
 
 const divs = [];
 
-let n_x = window.innerWidth / 120;
-let n_y = document.scrollingElement.clientHeight / 120;
+let n_x;
+let n_y;
+
+const init_box_count = () => {
+    const h = document.body.scrollHeight;
+    const w = window.innerWidth;
+    console.log(h, w);
+    n_x = w / 120 + !!(w % 120);
+    n_y = h / 120 + !!(h % 120);
+}
 
 const add_boxes = () => {
     bg.innerHTML = "";
+    init_box_count();
     for (let i = 0; i < n_x; i++) {
-        for (let j = 0; j < n_x; j++) {
+        for (let j = 0; j < n_y; j++) {
             const div = document.createElement("div");
             div.style.position = "absolute";
             div.style.left = `${i * 120}px`;
@@ -38,10 +47,14 @@ setInterval(() => {
     });
 }, 1000);
 
+let timeout;
+
 window.addEventListener("resize", () => {
-    n_x = window.innerWidth / 120;
-    n_y = window.innerHeight / 120;
-    add_boxes();
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+        init_box_count();
+        add_boxes();
+    }, 100);
 });
 
 add_boxes();
